@@ -137,6 +137,28 @@ class Main {
         }
         return result;
     }
+
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>>result = new LinkedList<>();
+        if(root==null) return result;
+        Queue<TreeNode>queue = new LinkedList<>();
+        queue.offer(root);
+        boolean isLeftToRight = true;
+        while(!queue.isEmpty()){
+            int level = queue.size();
+            List<Integer>list = new ArrayList<>();
+            for(int i= 0;i<level;i++){
+                TreeNode node = queue.poll();
+                if(isLeftToRight==true)  list.addLast(node.val);
+                else list.addFirst(node.val);
+                if(node.left!=null) queue.add(node.left);
+                if(node.right!=null) queue.add(node.right);
+            }
+            isLeftToRight = !isLeftToRight;
+            result.add(list);
+        }
+        return result;
+    }
     public static void main(String[] args) {
         
     }
